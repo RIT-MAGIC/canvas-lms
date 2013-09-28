@@ -43,9 +43,7 @@
     <%= render :partial => "group_list", :object => @user_groups %>
     <%= nbsp unless @current_user %>
   </div>
-  <% if @course_home_view == 'qlt' %>
-  	<% render :partial => "qlt/coures_home", :locals => {:course_home => true } %>
-  <% elsif @course_home_view == 'wiki' %>
+  <% if @course_home_view == 'wiki' %>
     <% js_bundle :wiki %>
     <%= render :partial => "wiki_pages/wiki_right_side", :locals => {:course_home => true} %>
   <% elsif @course_home_view == 'assignments' %>
@@ -71,7 +69,7 @@
   jammit_css :dashboard
   case @course_home_view
   when 'qlt'
-  	jammit_css :qlt
+  	jammit_css :context_modules #TODO Change
   when 'wiki'
     jammit_css :tinymce
   when 'modules'
@@ -213,6 +211,9 @@ $(document).ready(function() {
     </p>
     <div class="select_details ui-state-highlight ui-corner-all" style="display: none; padding: 1em; font-size: 12px;">
       <div class="feed_details options_details">
+      	<%= mt 'details.qlt', "The **qlt** layout uses qlt's unique design to display content on a weekly basis." %>
+      </div>
+      <div class="feed_details options_details">
         <%= mt 'details.recent_activity_dashboard', "The **recent activity dashboard** lets participants see the most recent conversations, announcements, discussions, and interactions for this course.  It's very similar to the dashboard page users see when they first log in, but only shows content for this specific course." %>
       </div>
       <div class="wiki_details options_details">
@@ -254,8 +255,10 @@ This layout is probably best for courses that aren't based on a specific schedul
       </div>
     <% end %>
   </div>
-  <% if @course_home_view == 'wiki' %>
-    <%= render :partial => "wiki_pages/content", :locals => {:course_home => true } %>
+  <% if @course_home_view == 'qlt' %>
+  	<%= render :partial => "qlt/content", :locals => {:course_home => true} %>
+  <% elsif @course_home_view == 'wiki' %>
+    <%= render :partial => "wiki_pages/content", :locals => {:course_home => true} %>
   <% elsif @course_home_view == 'modules' %>
     <%= render :partial => 'context_modules/content', :locals => {:course_home => true} %>
   <% elsif @course_home_view == 'assignments' %>
