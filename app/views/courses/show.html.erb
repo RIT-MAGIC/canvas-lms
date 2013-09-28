@@ -43,7 +43,9 @@
     <%= render :partial => "group_list", :object => @user_groups %>
     <%= nbsp unless @current_user %>
   </div>
-  <% if @course_home_view == 'wiki' %>
+  <% if @course_home_view == 'qlt' %>
+  	<% render :partial => "qlt/coures_home", :locals => {:course_home => true } %>
+  <% elsif @course_home_view == 'wiki' %>
     <% js_bundle :wiki %>
     <%= render :partial => "wiki_pages/wiki_right_side", :locals => {:course_home => true} %>
   <% elsif @course_home_view == 'assignments' %>
@@ -68,6 +70,8 @@
 <%
   jammit_css :dashboard
   case @course_home_view
+  when 'qlt'
+  	jammit_css :qlt
   when 'wiki'
     jammit_css :tinymce
   when 'modules'
@@ -199,11 +203,12 @@ $(document).ready(function() {
     <p>
       <label for="edit_course_home_content_select"><strong><%= t('labels.set_layout', %{When people visit the course page, show them}) %></strong></label>
       <select name="course[default_view]" id="edit_course_home_content_select">
-        <option value="feed" <%= 'selected' if @context.default_view == 'feed' %>><%= t('options.recent_activity_dashboard', %{the Recent Activity Dashboard}) %></option>
-        <option value="wiki" <%= 'selected' if @context.default_view == 'wiki' %>><%= t('options.custom_page', %{a Page I'll Design Myself}) %></option>
-        <option value="modules" <%= 'selected' if @context.default_view == 'modules' %>><%= t('options.modules', %{the Course Modules/Sections}) %></option>
-        <option value="assignments" <%= 'selected' if @context.default_view == 'assignments' %>><%= t('options.assignments', %{the Assignment List}) %></option>
-        <option value="syllabus" <%= 'selected' if @context.default_view == 'syllabus' %>><%= t('options.syllabus', %{the Assignments with Syllabus}) %></option>
+      	<option value="qlt" <%= 'selected' if @context.default_view == 'qlt' %>><%= t('options.qlt', %{The qlt Layout}) %></option>
+        <option value="feed" <%= 'selected' if @context.default_view == 'feed' %>><%= t('options.recent_activity_dashboard', %{The Recent Activity Dashboard}) %></option>
+        <option value="wiki" <%= 'selected' if @context.default_view == 'wiki' %>><%= t('options.custom_page', %{A Page I'll Design Myself}) %></option>
+        <option value="modules" <%= 'selected' if @context.default_view == 'modules' %>><%= t('options.modules', %{The Course Modules/Sections}) %></option>
+        <option value="assignments" <%= 'selected' if @context.default_view == 'assignments' %>><%= t('options.assignments', %{The Assignment List}) %></option>
+        <option value="syllabus" <%= 'selected' if @context.default_view == 'syllabus' %>><%= t('options.syllabus', %{The Assignments with Syllabus}) %></option>
       </select>
     </p>
     <div class="select_details ui-state-highlight ui-corner-all" style="display: none; padding: 1em; font-size: 12px;">
