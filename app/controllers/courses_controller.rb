@@ -1110,6 +1110,9 @@ class CoursesController < ApplicationController
 
       @contexts = [@context]
       case @course_home_view
+      when "qlt"
+        add_crumb(t('#crumbs.qlt', 'Qlt'))
+        @modules = @context.modules_visible_to(@current_user)
       when "wiki"
         @wiki = @context.wiki
         @page = @wiki.front_page

@@ -1,7 +1,16 @@
 <% course_home ||= false %>
 <% if course_home %>
-	<h1>BALLS</h1>
-	<h2>BALLS BALLS</h2>
+	<h1>LIST OF THINGS</h1>
+	<% @modules.each do |m| %>
+		<h3><%= m.try_rescue(:name) %></h3>
+		<div class="row-fluid">
+			<% m.try_rescue(:content_tags).each do |item| %>
+				<div class="span4">
+					<h5><%= item.try_rescue(:title) %></h5>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
 <% elsif user_home %>
 	<h1>SUPER BALLS</h1>
 <% end %>

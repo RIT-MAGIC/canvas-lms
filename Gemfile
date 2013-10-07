@@ -98,6 +98,9 @@ gem 'crocodoc-ruby',  '0.0.1', :require => 'crocodoc'
 # we can go back to the gem once 1.7.8 is released
 gem 'regru-premailer', :require => 'premailer', :git => "https://github.com/regru/premailer.git", :ref => "08a73c70701f5d81bc4a5cf6c959a45ad94db88e"
 
+#Use Sentry to catch errors and things
+gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git", :ref => "1ebe7de9bc71341da39789d798f6b265a89eebeb"
+
 group :assets do
   gem 'compass-rails', '1.0.3'
   gem 'dress_code', '1.0.2'
