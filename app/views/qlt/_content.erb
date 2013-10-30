@@ -1,16 +1,64 @@
 <% course_home ||= false %>
+<script type="text/javascript">
+function addEvent(element, event, fn) {
+    if (element.addEventListener)
+        element.addEventListener(event, fn, false);
+    else if (element.attachEvent)
+        element.attachEvent('on' + event, fn);
+}
+</script>
 <% if course_home %>
 	<h1>LIST OF THINGS</h1>
 	<% @modules.each do |m| %>
-		<h3><%= m.try_rescue(:name) %></h3>
-		<div class="row-fluid">
+
+	<script type="text/javascript">
+		function addEvent(element, event, fn) {
+		    if (element.addEventListener)
+		        element.addEventListener(event, fn, false);
+		    else if (element.attachEvent)
+		        element.attachEvent('on' + event, fn);
+		}
+		addEvent(window, 'load', function() {
+			console.log('Building carousel ' + <%= m.try_rescue(:id) %>);
+			//	Variable number of visible items with variable sizes
+			$('#carousel-<%= m.try_rescue(:id) %>').carouFredSel({
+				width: '100%',
+				height: 500,
+				prev: '#carousel-prev-<%= m.try_rescue(:id) %>',
+				next: '#carousel-next-<%= m.try_rescue(:id) %>',
+				auto: false
+			});
+		});
+	</script>
+
+	<div class="list_carousel">
+		<ul id="carousel-<%= m.try_rescue(:id) %>">
 			<% m.try_rescue(:content_tags).each do |item| %>
-				<div class="span4">
-					<h5><%= item.try_rescue(:title) %></h5>
-				</div>
+				<% case item.try_rescue(:content_type) %>
+				<% when "Assignment" %>
+					<li style="width: 350px;">
+						<h3>
+							<a class="title <%= '_explicit_external_link' if item && item.content_type == 'ExternalUrl' %>" href="<%= context_url(@context, :context_url) %>/modules/items/<%= item ? item.id : "{{ id }}" %>">
+								<%= item.try_rescue(:title) %>
+							</a>
+						</h3>
+						<h6>This is an <%= item.try_rescue(:content_type) %>.</h6>
+						<%= item.try_rescue(:content).try_rescue(:description).html_safe %>
+					</li>
+				<% when "ExternalUrl" %>
+					<li style="width: 350px;">
+						<iframe width="350" height="300" src="<%= item.try_rescue(:url) %>" frameborder="0" allowfullscreen></iframe>
+					</li>
+				<% end %>
 			<% end %>
-		</div>
+		</ul>
+	</div>
+
+	<div class="carousel-clearfix"></div>
+	<a id="carousel-prev-<%= m.try_rescue(:id) %>" class="carousel-prev" href="#">&lt;</a>
+	<a id="carousel-next-<%= m.try_rescue(:id) %>" class="carousel-next" href="#">&gt;</a>
 	<% end %>
-<% elsif user_home %>
-	<h1>SUPER BALLS</h1>
 <% end %>
+
+<% jammit_css :qlt %>
+<% js_bundle  :jquery_carouFredSel %>

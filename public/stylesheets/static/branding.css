@@ -18,9 +18,9 @@
 
 /*if you replace the left canvas logo, move a smaller one to the right side of the header--I made the image gray first*/
 #header-logo-secondary {
-  background: url("/images/branding/header_canvas_logo2.png?v1") no-repeat scroll 0 0 transparent;
+  /*background: url("/images/branding/header_canvas_logo2.png?v1") no-repeat scroll 0 0 transparent;*/
   bottom: 11px;
-  height: 26;
+  height: 26px;
   position: absolute;
   right: 26px;
   width: 135px;
@@ -63,11 +63,11 @@ body.modal #modal-box.login-box h1 {
 body.modal #modal-box.login-box { 
   height: 435px;
   width: 615px;
-  color: #2784A0;
+  color: #FFF;
 }
 
 /*change the color of 'don't know your password'*/
-body.modal #modal-box.login-box a { color: #2784A0 !important; } 
+body.modal #modal-box.login-box a { color: #FFF !important; } 
 
 /*change the color of the login button*/
 body.modal #modal-box .button, body.modal #login-box .button {

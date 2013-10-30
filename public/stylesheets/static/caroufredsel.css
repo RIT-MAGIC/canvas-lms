@@ -1,0 +1,41 @@
+.list_carousel {
+	background-color: #ccc;
+	width: 100%;
+}
+.list_carousel ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+}
+.list_carousel li {
+	font-size: 16px;
+	color: #999;
+	background-color: #eee;
+	border: 2px solid #999;
+	width: 50px;
+	height: auto;
+	max-height: 500px;
+	overflow: auto;
+	padding: 0 5px;
+	margin: 6px;
+	display: block;
+	float: left;
+	word-wrap: break-word;
+}
+.carousel-clearfix {
+	float: none;
+	clear: both;
+}
+.carousel-prev,
+.carousel-next {
+	font-size: 60px;
+}
+.carousel-prev {
+	float: left;
+	margin-left: 10px;
+}
+.carousel-next {
+	float: right;
+	margin-right: 10px;
+}
