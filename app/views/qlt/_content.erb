@@ -1,6 +1,6 @@
 <% course_home ||= false %>
 <% if course_home %>
-	<h1>LIST OF THINGS</h1>
+	<h1>Course Content</h1>
 	<% @modules.each do |m| %>
 		<h3><%= m.try_rescue(:name) %></h3>
 		<div class="row-fluid">
