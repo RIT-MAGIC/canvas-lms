@@ -451,6 +451,8 @@ module ApplicationHelper
             path = send(tab[:href], *tab[:args])
           elsif tab[:no_args]
             path = send(tab[:href])
+          elsif tab[:href_lit]
+            path = tab[:href]
           else
             path = send(tab[:href], @context)
           end

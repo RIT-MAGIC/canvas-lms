@@ -2707,6 +2707,7 @@ class Course < ActiveRecord::Base
   TAB_ANNOUNCEMENTS = 14
   TAB_OUTCOMES = 15
   TAB_COLLABORATIONS = 16
+  TAB_HANGOUT = 17
 
   def self.default_tabs
     [
@@ -2725,6 +2726,7 @@ class Course < ActiveRecord::Base
       { :id => TAB_MODULES, :label => t('#tabs.modules', "Modules"), :css_class => 'modules', :href => :course_context_modules_path },
       { :id => TAB_CONFERENCES, :label => t('#tabs.conferences', "Conferences"), :css_class => 'conferences', :href => :course_conferences_path },
       { :id => TAB_COLLABORATIONS, :label => t('#tabs.collaborations', "Collaborations"), :css_class => 'collaborations', :href => :course_collaborations_path },
+      { :id => TAB_HANGOUT, :label => t('#tabs.hangout', "Hangout"), :css_class => 'hangout', :href => "https://hangoutsapi.talkgadget.google.com/hangouts/_?gid=1074805582237", :href_lit => true },
       { :id => TAB_SETTINGS, :label => t('#tabs.settings', "Settings"), :css_class => 'settings', :href => :course_settings_path },
     ]
   end
@@ -2767,6 +2769,7 @@ class Course < ActiveRecord::Base
         if default_tab
           tab[:label] = default_tab[:label]
           tab[:href] = default_tab[:href]
+          tab[:href_lit] = default_tab[:href_lit]
           tab[:css_class] = default_tab[:css_class]
           tab[:args] = default_tab[:args]
           tab[:visibility] = default_tab[:visibility]
