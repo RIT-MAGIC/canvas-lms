@@ -72,6 +72,16 @@
             <span class="course_info sis_source_id"><%= @context.sis_source_id %></span>
           </td>
       <% end %>
+      </tr><tr>
+        <td class="form-label"><%= f.blabel :hangout_url, :en => "Hangout URL" %></td>
+        <td>
+          <% if can_rename_course %>
+            <span class="course_form"><%= f.text_field :hangout_url %></span>
+          <% else %>
+            <span class="course_form course_code"><%= @context.try_rescue( :hangout_url ) %></span>
+          <% end %>
+          <span class="course_info course_code"><%= @context.try_rescue( :hangout_url ) %></span>
+        </td>
       <% if @current_user && Account.site_admin.account_users_for(@current_user).present? %>
         </tr><tr>
           <td class="form-label"><%= f.blabel :root_account_id, :en => "Root Account" %></td>

@@ -61,7 +61,10 @@ class Course < ActiveRecord::Base
                   :hide_final_grades,
                   :hide_distribution_graphs,
                   :lock_all_announcements,
-                  :public_syllabus
+                  :public_syllabus,
+                  :hangout_url
+
+  has_one :hangout_url
 
   serialize :tab_configuration
   serialize :settings, Hash
@@ -2726,7 +2729,7 @@ class Course < ActiveRecord::Base
       { :id => TAB_MODULES, :label => t('#tabs.modules', "Modules"), :css_class => 'modules', :href => :course_context_modules_path },
       { :id => TAB_CONFERENCES, :label => t('#tabs.conferences', "Conferences"), :css_class => 'conferences', :href => :course_conferences_path },
       { :id => TAB_COLLABORATIONS, :label => t('#tabs.collaborations', "Collaborations"), :css_class => 'collaborations', :href => :course_collaborations_path },
-      { :id => TAB_HANGOUT, :label => t('#tabs.hangout', "Hangout"), :css_class => 'hangout', :href => "https://hangoutsapi.talkgadget.google.com/hangouts/_?gid=1074805582237", :href_lit => true },
+      { :id => TAB_HANGOUT, :label => t('#tabs.hangout', "Hangout"), :css_class => 'hangout', :href => :hangout_url },
       { :id => TAB_SETTINGS, :label => t('#tabs.settings', "Settings"), :css_class => 'settings', :href => :course_settings_path },
     ]
   end
