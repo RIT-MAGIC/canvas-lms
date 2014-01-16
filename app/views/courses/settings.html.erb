@@ -78,9 +78,9 @@
           <% if can_rename_course %>
             <span class="course_form"><%= f.text_field :hangout_url %></span>
           <% else %>
-            <span class="course_form course_code"><%= @context.try_rescue( :hangout_url ) %></span>
+            <span class="course_form course_code"><a href="<%= @context[ :hangout_url ] %>">Hangout</a></span>
           <% end %>
-          <span class="course_info course_code"><%= @context.try_rescue( :hangout_url ) %></span>
+          <span class="course_info course_code"><a href="<%= @context[ :hangout_url ] %>">Hangout</a></span>
         </td>
       <% if @current_user && Account.site_admin.account_users_for(@current_user).present? %>
         </tr><tr>

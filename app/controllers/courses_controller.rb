@@ -1464,6 +1464,13 @@ class CoursesController < ApplicationController
       if params[:course].has_key?(:syllabus_body)
         params[:course][:syllabus_body] = process_incoming_html_content(params[:course][:syllabus_body])
       end
+
+      # For updating hangout urls
+      hangout_url = params[:course].delete :hangout_url
+      if hangout_url && Account.site_admin.grants_right?(@current_user, session, :manage_courses)
+        @course[:hangout_url] = hangout_url if hangout_url != @course[:hangout_url]
+      end
+
       root_account_id = params[:course].delete :root_account_id
       if root_account_id && Account.site_admin.grants_right?(@current_user, session, :manage_courses)
         @course.root_account = Account.root_accounts.find(root_account_id)

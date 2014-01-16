@@ -64,8 +64,6 @@ class Course < ActiveRecord::Base
                   :public_syllabus,
                   :hangout_url
 
-  has_one :hangout_url
-
   serialize :tab_configuration
   serialize :settings, Hash
   belongs_to :root_account, :class_name => 'Account'
@@ -697,7 +695,7 @@ class Course < ActiveRecord::Base
   end
 
   def update_enrollments_later
-    self.update_enrolled_users if !self.new_record? && !(self.changes.keys & ['workflow_state', 'name', 'course_code', 'start_at', 'conclude_at', 'enrollment_term_id']).empty?
+    self.update_enrolled_users if !self.new_record? && !(self.changes.keys & ['workflow_state', 'name', 'course_code', 'hangout_url', 'start_at', 'conclude_at', 'enrollment_term_id']).empty?
     true
   end
 
