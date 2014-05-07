@@ -54,6 +54,7 @@ class Handlebars
 
     def compile_template(source, id, plugin=nil)
       require 'execjs'
+      require 'multi_json'
       # if the first letter of the template name is "_", register it as a partial
       # ex: _foobar.handlebars or subfolder/_something.handlebars
       filename = File.basename(id)
